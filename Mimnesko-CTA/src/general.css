@@ -1,0 +1,38 @@
+
+:root {
+  --color-primary: #ff5a00;
+  --color-bg: #f5f1ed;
+  --color-text: #000000;
+  --color-text-secondary: #6a7282;
+  --color-text-tertiary: #4a5565;
+  --color-border: #e5e7eb;
+  --color-accent: #99a1af;
+  --color-white: #ffffff;
+  --color-gray: #d1d5dc;
+  --color-black: #000000;
+  --font-main: 'Inter', sans-serif;
+  --font-mono: 'Menlo', monospace;
+}
+
+body {
+  font-family: var(--font-main);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-main);
+  color: var(--color-text);
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
