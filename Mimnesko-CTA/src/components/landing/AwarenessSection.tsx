@@ -59,14 +59,15 @@ export default function AwarenessSection() {
       const words = heading.textContent!.split(' ');
       heading.textContent = '';
       heading.style.visibility = 'visible';
-      heading.style.flexWrap = 'wrap';
-      heading.style.display = 'flex';
-      heading.style.gap = '0 0.3em';
-      const wordSpans = words.map((word) => {
+      const wordSpans = words.map((word, i) => {
         const span = document.createElement('span');
         span.textContent = word;
         span.style.display = 'inline-block';
         heading.appendChild(span);
+        if (i < words.length - 1) {
+          const space = document.createTextNode(' ');
+          heading.appendChild(space);
+        }
         return span;
       });
       gsap.from(wordSpans, {

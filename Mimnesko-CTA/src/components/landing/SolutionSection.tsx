@@ -62,14 +62,15 @@ export default function SolutionSection() {
       const words = title.textContent!.split(' ');
       title.textContent = '';
       title.style.visibility = 'visible';
-      title.style.display = 'flex';
-      title.style.flexWrap = 'wrap';
-      title.style.gap = '0 0.3em';
-      const wordSpans = words.map((word) => {
+      const wordSpans = words.map((word, i) => {
         const span = document.createElement('span');
         span.textContent = word;
         span.style.display = 'inline-block';
         title.appendChild(span);
+        if (i < words.length - 1) {
+          const space = document.createTextNode(' ');
+          title.appendChild(space);
+        }
         return span;
       });
       gsap.from(wordSpans, {

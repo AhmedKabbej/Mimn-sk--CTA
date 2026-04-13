@@ -23,9 +23,9 @@ export default function FinalCTASection() {
         const lineDiv = document.createElement('div');
         line.split('').forEach((char) => {
           const span = document.createElement('span');
-          span.textContent = char === ' ' ? '\u00A0' : char;
+          span.textContent = char === ' ' ? ' ' : char;
           span.style.display = 'inline-block';
-          if (char === ' ') span.style.minWidth = '0.3em';
+          if (char === ' ') span.style.whiteSpace = 'pre';
           lineDiv.appendChild(span);
           allChars.push(span);
         });
@@ -97,24 +97,20 @@ export default function FinalCTASection() {
         </div>
 
         {/* Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20">
+        <div className="flex flex-col sm:flex-row items-stretch justify-center gap-5 mb-20">
           <button
             data-anim="cta-btn"
-            className="h-[60px] px-10 rounded-xl flex items-center gap-3 text-[16px] bold cursor-pointer transition-opacity duration-300 hover:opacity-90"
+            className="h-[64px] w-[220px] inline-flex items-center justify-center text-[14px] uppercase tracking-[1.5px] bold cursor-pointer transition-opacity duration-300 hover:opacity-90 whitespace-nowrap"
             style={{ background: 'var(--color-primary)', color: 'var(--color-white)' }}
           >
-            Start experience
-            <span className="text-[18px]">→</span>
+            START NOW
           </button>
           <button
             data-anim="cta-btn"
-            className="h-[60px] px-10 rounded-xl flex items-center gap-3 text-[16px] bold border cursor-pointer transition-all duration-300 hover:border-[var(--color-primary)]"
-            style={{ background: 'transparent', color: 'var(--color-white)', borderColor: 'rgba(255,255,255,0.2)' }}
+            className="h-[64px] w-[220px] inline-flex items-center justify-center text-[14px] uppercase tracking-[1.5px] bold border cursor-pointer transition-all duration-300 hover:border-[var(--color-primary)] whitespace-nowrap"
+            style={{ background: 'transparent', color: 'var(--color-white)', borderColor: 'rgba(255,255,255,0.3)' }}
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z" />
-            </svg>
-            Discover low-tech cloud
+            LEARN MORE
           </button>
         </div>
 

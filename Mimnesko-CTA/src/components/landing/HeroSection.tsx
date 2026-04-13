@@ -21,9 +21,9 @@ export default function HeroSection() {
       title.style.visibility = 'visible';
       const chars = text.split('').map((char) => {
         const span = document.createElement('span');
-        span.textContent = char === ' ' ? '\u00A0' : char;
+        span.textContent = char === ' ' ? ' ' : char;
         span.style.display = 'inline-block';
-        if (char === ' ') span.style.minWidth = '0.3em';
+        if (char === ' ') span.style.whiteSpace = 'pre';
         title.appendChild(span);
         return span;
       });
