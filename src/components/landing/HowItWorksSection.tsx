@@ -30,7 +30,7 @@ const infoCards = [
     bg: 'var(--color-white)',
     text: 'var(--color-text)',
     accent: 'var(--color-primary)',
-    valueSize: 'text-[72px]',
+    valueSize: 'text-[48px] md:text-[72px]',
     border: true,
   },
   {
@@ -40,7 +40,7 @@ const infoCards = [
     bg: 'var(--color-primary)',
     text: 'var(--color-white)',
     accent: 'rgba(255,255,255,0.8)',
-    valueSize: 'text-[42px] md:text-[48px]',
+    valueSize: 'text-[32px] md:text-[48px]',
     border: false,
   },
   {
@@ -50,7 +50,7 @@ const infoCards = [
     bg: 'var(--color-black)',
     text: 'var(--color-white)',
     accent: 'var(--color-primary)',
-    valueSize: 'text-[22px] md:text-[24px]',
+    valueSize: 'text-[18px] md:text-[24px]',
     border: false,
   },
 ];
@@ -71,13 +71,26 @@ export default function HowItWorksSection() {
       const text = title.textContent || '';
       title.textContent = '';
       title.style.visibility = 'visible';
-      const chars = text.split('').map((char) => {
-        const span = document.createElement('span');
-        span.textContent = char === ' ' ? ' ' : char;
-        span.style.display = 'inline-block';
-        if (char === ' ') span.style.whiteSpace = 'pre';
-        title.appendChild(span);
-        return span;
+      const chars: HTMLSpanElement[] = [];
+      text.split(' ').forEach((word, wordIdx, arr) => {
+        const wordWrap = document.createElement('span');
+        wordWrap.style.display = 'inline-block';
+        wordWrap.style.whiteSpace = 'nowrap';
+        word.split('').forEach((char) => {
+          const span = document.createElement('span');
+          span.textContent = char;
+          span.style.display = 'inline-block';
+          wordWrap.appendChild(span);
+          chars.push(span);
+        });
+        title.appendChild(wordWrap);
+        if (wordIdx < arr.length - 1) {
+          const space = document.createElement('span');
+          space.innerHTML = '&nbsp;';
+          space.style.display = 'inline-block';
+          title.appendChild(space);
+          chars.push(space);
+        }
       });
       gsap.from(chars, {
         opacity: 0, y: 40, duration: 0.6, stagger: 0.02, ease: 'power4.out',
@@ -108,7 +121,7 @@ export default function HowItWorksSection() {
             </p>
             <h2
               ref={titleRef}
-              className="bold text-[40px] md:text-[48px] leading-[1.1] mb-14"
+              className="bold text-[32px] md:text-[48px] leading-[1.1] mb-10 md:mb-14"
               style={{ color: 'var(--color-text)', visibility: 'hidden' }}
             >
               Comment ça marche?
@@ -117,8 +130,8 @@ export default function HowItWorksSection() {
             {/* Steps */}
             <div className="space-y-10">
               {steps.map((step) => (
-                <div key={step.number} data-anim="step" className="flex gap-6 items-start">
-                  <p className="bold text-[52px] md:text-[60px] leading-none shrink-0" style={{ color: 'rgba(255,90,0,0.15)' }}>
+                <div key={step.number} data-anim="step" className="flex gap-4 md:gap-6 items-start">
+                  <p className="bold text-[40px] md:text-[60px] leading-none shrink-0" style={{ color: 'rgba(255,90,0,0.15)' }}>
                     {step.number}
                   </p>
                   <div className="pt-3">
@@ -136,7 +149,7 @@ export default function HowItWorksSection() {
               <div
                 key={card.label}
                 data-anim="info-card"
-                className="p-8 md:p-10 rounded-lg"
+                className="p-6 md:p-10 rounded-lg"
                 style={{
                   background: card.bg,
                   border: card.border ? '2px solid var(--color-text)' : 'none',

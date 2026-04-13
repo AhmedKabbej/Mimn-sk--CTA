@@ -69,13 +69,26 @@ export default function PrinciplesSection() {
       const text = title.textContent || '';
       title.textContent = '';
       title.style.visibility = 'visible';
-      const chars = text.split('').map((char) => {
-        const span = document.createElement('span');
-        span.textContent = char === ' ' ? ' ' : char;
-        span.style.display = 'inline-block';
-        if (char === ' ') span.style.whiteSpace = 'pre';
-        title.appendChild(span);
-        return span;
+      const chars: HTMLSpanElement[] = [];
+      text.split(' ').forEach((word, wordIdx, arr) => {
+        const wordWrap = document.createElement('span');
+        wordWrap.style.display = 'inline-block';
+        wordWrap.style.whiteSpace = 'nowrap';
+        word.split('').forEach((char) => {
+          const span = document.createElement('span');
+          span.textContent = char;
+          span.style.display = 'inline-block';
+          wordWrap.appendChild(span);
+          chars.push(span);
+        });
+        title.appendChild(wordWrap);
+        if (wordIdx < arr.length - 1) {
+          const space = document.createElement('span');
+          space.innerHTML = '&nbsp;';
+          space.style.display = 'inline-block';
+          title.appendChild(space);
+          chars.push(space);
+        }
       });
       gsap.from(chars, {
         opacity: 0, y: 50, rotateX: -45, duration: 0.7, stagger: 0.03, ease: 'power4.out',

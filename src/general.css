@@ -15,7 +15,13 @@
 }
 
 html {
-  scroll-snap-type: y proximity;
+  scroll-snap-type: none;
+}
+
+@media (min-width: 768px) {
+  html {
+    scroll-snap-type: y proximity;
+  }
 }
 
 body {
