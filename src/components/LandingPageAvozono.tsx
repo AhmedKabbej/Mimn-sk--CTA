@@ -1,7 +1,3 @@
-import React from 'react';
-// Assets from Figma export
-const imgContainer = "http://localhost:3845/assets/fe6b0b1eedddd544e367b6850883fe1587f38159.png";
-
 export default function LandingPageAvozono() {
   return (
     <div className="bg-white flex flex-col min-h-screen w-full">
