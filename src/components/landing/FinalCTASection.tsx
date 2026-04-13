@@ -8,6 +8,7 @@ export default function FinalCTASection() {
   const sectionRef = useRef<HTMLElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const sphereRef = useRef<HTMLDivElement>(null);
+  const sphere2Ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!sectionRef.current || !headlineRef.current) return;
@@ -59,20 +60,48 @@ export default function FinalCTASection() {
         scrollTrigger: { trigger: '[data-anim="footer"]', start: 'top 95%' },
       });
 
-      // Sphere random floating animation (never stops)
+      // Sphere random floating animation (never stops) — covers entire section
       const sphere = sphereRef.current;
-      if (sphere) {
+      const section = sectionRef.current;
+      if (sphere && section) {
         const float = () => {
+          const sW = section.offsetWidth;
+          const sH = section.offsetHeight;
+          const sphereSize = sphere.offsetWidth;
+          // random position anywhere inside the section (clamped so it stays within bounds)
+          const maxX = sW - sphereSize / 2;
+          const maxY = sH - sphereSize / 2;
           gsap.to(sphere, {
-            x: gsap.utils.random(-60, 60),
-            y: gsap.utils.random(-40, 40),
-            scale: gsap.utils.random(0.9, 1.1),
+            left: gsap.utils.random(-sphereSize / 2, maxX),
+            top: gsap.utils.random(-sphereSize / 2, maxY),
+            scale: gsap.utils.random(0.8, 1.2),
             duration: gsap.utils.random(2, 4),
             ease: 'sine.inOut',
             onComplete: float,
           });
         };
         float();
+      }
+
+      // Second sphere random floating animation
+      const sphere2 = sphere2Ref.current;
+      if (sphere2 && section) {
+        const float2 = () => {
+          const sW = section.offsetWidth;
+          const sH = section.offsetHeight;
+          const sphereSize = sphere2.offsetWidth;
+          const maxX = sW - sphereSize / 2;
+          const maxY = sH - sphereSize / 2;
+          gsap.to(sphere2, {
+            left: gsap.utils.random(-sphereSize / 2, maxX),
+            top: gsap.utils.random(-sphereSize / 2, maxY),
+            scale: gsap.utils.random(0.7, 1.15),
+            duration: gsap.utils.random(3, 5),
+            ease: 'sine.inOut',
+            onComplete: float2,
+          });
+        };
+        float2();
       }
     }, sectionRef);
     return () => ctx.revert();
@@ -85,14 +114,30 @@ export default function FinalCTASection() {
         ref={sphereRef}
         className="absolute pointer-events-none"
         style={{
-          top: '-80px',
-          left: '-80px',
-          width: '400px',
-          height: '400px',
+          top: '0px',
+          left: '0px',
+          width: '700px',
+          height: '700px',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(255,90,0,0.3) 0%, rgba(255,90,0,0.08) 50%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(255,90,0,0.32) 0%, rgba(255,90,0,0.10) 45%, transparent 70%)',
+          filter: 'blur(60px)',
+          willChange: 'transform, left, top',
+        }}
+      />
+
+      {/* Second sphere */}
+      <div
+        ref={sphere2Ref}
+        className="absolute pointer-events-none"
+        style={{
+          top: '50%',
+          right: '0px',
+          width: '500px',
+          height: '500px',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(255,120,30,0.22) 0%, rgba(255,90,0,0.06) 50%, transparent 70%)',
           filter: 'blur(50px)',
-          willChange: 'transform',
+          willChange: 'transform, left, top',
         }}
       />
 

@@ -1,50 +1,15 @@
-# React + TypeScript + Vite
+# Mimnḗskō
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Comment une expérience immersive et poétique peut-elle transformer notre rapport aux souvenirs numériques et encourager l'adoption de pratiques de stockage plus éthiques et personnelles ?**
 
-Currently, two official plugins are available:
+Mimnḗskō est une expérience immersive et poétique qui transforme notre manière de conserver et de ressentir nos souvenirs numériques.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Aujourd'hui, nous confions nos photos, nos vidéos et nos moments les plus intimes à des plateformes opaques qui exploitent silencieusement nos données.
 
-## Expanding the ESLint configuration
+Mimnḗskō propose une alternative en s'appuyant sur des solutions de cloud éthiques existantes, et en les dépassant par une couche d'expérience sensible et narrative.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Il ne s'agit plus seulement de stocker, mais de rendre les souvenirs habitables : un monde vivant, un paysage mémoriel que l'on explore comme on naviguerait dans sa propre mémoire, entre images, émotions et fragments du passé.
 
-- Configure the top-level `parserOptions` property like this:
+À la croisée de l'art et du code, Mimnḗskō utilise l'immersion, l'espace négatif et l'émotion pour structurer la navigation et provoquer une prise de conscience : et si nos souvenirs méritaient mieux qu'un cloud ?
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+C'est à la fois une œuvre et un outil, une invitation à ressentir, comprendre et reprendre le contrôle de notre mémoire numérique.
