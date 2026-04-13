@@ -158,7 +158,7 @@ export default function FinalCTASection() {
         {/* Headline */}
         <h2
           ref={headlineRef}
-          data-text={'Réappropriez-vous\nvos\nsouvenirs.'}
+          data-text={'Réappropriez-vous\nvos souvenirs.'}
           className="bold leading-[1.05] mb-6 md:mb-8"
           style={{
             fontSize: 'clamp(1.6rem, 7vw, 80px)',
@@ -166,7 +166,7 @@ export default function FinalCTASection() {
             visibility: 'hidden',
           }}
         >
-          {'Réappropriez-vous\nvos\nsouvenirs.'}
+          {'Réappropriez-vous\nvos souvenirs.'}
         </h2>
 
         {/* Subtitle */}
@@ -208,7 +208,12 @@ export default function FinalCTASection() {
         {/* Footer */}
         <div data-anim="footer" className="border-t pt-4 md:pt-8 pb-4 md:pb-0" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
           <p className="mono text-[10px] md:text-[13px] text-center tracking-[1px]" style={{ color: 'var(--color-text-tertiary)' }}>
-            MIMNESKÕ © 2026 — A POETIC RESISTANCE
+            <span className="hidden md:inline whitespace-nowrap">
+              MIMNESKÕ © 2026<br />A POETIC RESISTANCE
+            </span>
+            <span className="inline md:hidden">
+              MIMNESKÕ © 2026 — A POETIC RESISTANCE
+            </span>
           </p>
         </div>
       </div>
