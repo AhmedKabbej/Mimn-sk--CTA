@@ -18,7 +18,7 @@ function CloudLoader({ onComplete }: { onComplete: () => void }) {
         onComplete: () => {
           gsap.to(containerRef.current, {
             opacity: 0,
-            duration: 0.45,
+            duration: 0.25,
             ease: 'power2.inOut',
             onComplete: () => { setDone(true); onComplete(); },
           });
@@ -32,10 +32,10 @@ function CloudLoader({ onComplete }: { onComplete: () => void }) {
       gsap.set(barRef.current, { scaleX: 0 });
       gsap.set(barTrackRef.current, { opacity: 0 });
 
-      tl.to(els, { opacity: 1, y: 0, x: 0, rotationX: 0, scale: 1, filter: 'blur(0px)', duration: 0.7, ease: 'power3.out', stagger: { each: 0.07, from: 'center' } }, 0.15);
-      tl.to(barTrackRef.current, { opacity: 1, duration: 0.3, ease: 'power1.out' }, 0.15);
-      tl.to(barRef.current, { scaleX: 1, duration: 1.8, ease: 'power1.inOut' }, 0.15);
-      tl.to({}, { duration: 0.5 });
+      tl.to(els, { opacity: 1, y: 0, x: 0, rotationX: 0, scale: 1, filter: 'blur(0px)', duration: 0.4, ease: 'power3.out', stagger: { each: 0.04, from: 'center' } }, 0.1);
+      tl.to(barTrackRef.current, { opacity: 1, duration: 0.2, ease: 'power1.out' }, 0.1);
+      tl.to(barRef.current, { scaleX: 1, duration: 0.8, ease: 'power1.inOut' }, 0.1);
+      tl.to({}, { duration: 0.15 });
     }, containerRef);
     return () => ctx.revert();
   }, [onComplete]);
@@ -133,20 +133,12 @@ export default function CloudPage() {
 
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-      // Image — hero entrance, big and prominent
-      tl.from(imgRef.current, { opacity: 0, scale: 0.8, y: 40, duration: 1.2 });
-
-      // Title text-split
-      tl.from(titleChars, { opacity: 0, y: 50, rotateX: -90, duration: 0.7, stagger: 0.025, ease: 'power4.out' }, '-=0.5');
-
-      // Subtitle text-split
-      tl.from(subChars, { opacity: 0, y: 30, rotateX: -60, duration: 0.6, stagger: 0.015, ease: 'power4.out' }, '-=0.3');
-
-      // Features
-      tl.from('[data-cloud-feature]', { opacity: 0, y: 20, duration: 0.6, stagger: 0.12 }, '-=0.2');
-
-      // CTA
-      tl.from(ctaRef.current, { opacity: 0, y: 20, duration: 0.6 }, '-=0.1');
+      // Everything starts simultaneously — slow, smooth reveal
+      tl.from(imgRef.current, { opacity: 0, scale: 0.94, y: 25, duration: 1.6 }, 0);
+      tl.from(titleChars, { opacity: 0, y: 35, rotateX: -90, duration: 1.4, stagger: 0.025, ease: 'power4.out' }, 0);
+      tl.from(subChars, { opacity: 0, y: 20, rotateX: -60, duration: 1.2, stagger: 0.018, ease: 'power4.out' }, 0);
+      tl.from('[data-cloud-feature]', { opacity: 0, y: 40, scale: 0.92, filter: 'blur(4px)', duration: 1.6, stagger: 0, ease: 'power3.out' }, 0);
+      tl.from(ctaRef.current, { opacity: 0, y: 15, duration: 1.4 }, 0);
     }, pageRef);
 
     return () => ctx.revert();

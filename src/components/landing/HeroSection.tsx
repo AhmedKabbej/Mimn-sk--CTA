@@ -5,6 +5,114 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+/* ── Interactive 19 → 26: spin on hover, scroll-to-bottom on click ── */
+function YearCounter() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const topRef = useRef<HTMLSpanElement>(null);
+  const arrowRef = useRef<HTMLSpanElement>(null);
+  const bottomRef = useRef<HTMLSpanElement>(null);
+  const spinTl = useRef<gsap.core.Timeline | null>(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const ctx = gsap.context(() => {
+      // Entrance: digits roll in
+      gsap.from(topRef.current, { rotateX: -90, opacity: 0, duration: 0.8, delay: 0.5, ease: 'back.out(1.7)' });
+      gsap.from(arrowRef.current, { opacity: 0, scale: 0, duration: 0.5, delay: 0.8, ease: 'power2.out' });
+      gsap.from(bottomRef.current, { rotateX: 90, opacity: 0, duration: 0.8, delay: 1.0, ease: 'back.out(1.7)' });
+    }, containerRef);
+    return () => ctx.revert();
+  }, []);
+
+  const handleEnter = () => {
+    // Chaotic explosion — elements fly in random directions like breaking apart
+    spinTl.current = gsap.timeline({ repeat: -1, repeatDelay: 0.3, defaults: { ease: 'power3.inOut' } });
+    spinTl.current
+      .to(topRef.current, {
+        x: () => gsap.utils.random(-40, 40),
+        y: () => gsap.utils.random(-25, 25),
+        rotate: () => gsap.utils.random(-180, 180),
+        scale: () => gsap.utils.random(0.6, 1.6),
+        duration: 0.5,
+      }, 0)
+      .to(arrowRef.current, {
+        x: () => gsap.utils.random(-30, 30),
+        y: () => gsap.utils.random(-20, 20),
+        rotate: () => gsap.utils.random(-270, 270),
+        scale: () => gsap.utils.random(0.4, 2),
+        duration: 0.4,
+      }, 0)
+      .to(bottomRef.current, {
+        x: () => gsap.utils.random(-40, 40),
+        y: () => gsap.utils.random(-25, 25),
+        rotate: () => gsap.utils.random(-180, 180),
+        scale: () => gsap.utils.random(0.6, 1.6),
+        duration: 0.5,
+      }, 0)
+      // Second burst
+      .to(topRef.current, {
+        x: () => gsap.utils.random(-50, 50),
+        y: () => gsap.utils.random(-30, 30),
+        rotate: () => gsap.utils.random(-360, 360),
+        scale: () => gsap.utils.random(0.5, 1.8),
+        duration: 0.4,
+      })
+      .to(arrowRef.current, {
+        x: () => gsap.utils.random(-40, 40),
+        y: () => gsap.utils.random(-25, 25),
+        rotate: () => gsap.utils.random(-360, 360),
+        scale: () => gsap.utils.random(0.3, 2.2),
+        duration: 0.35,
+      }, '<')
+      .to(bottomRef.current, {
+        x: () => gsap.utils.random(-50, 50),
+        y: () => gsap.utils.random(-30, 30),
+        rotate: () => gsap.utils.random(-360, 360),
+        scale: () => gsap.utils.random(0.5, 1.8),
+        duration: 0.4,
+      }, '<');
+  };
+
+  const handleLeave = () => {
+    spinTl.current?.kill();
+    gsap.to([topRef.current, arrowRef.current, bottomRef.current], {
+      x: 0, y: 0, rotate: 0, scale: 1,
+      duration: 0.6, ease: 'elastic.out(1, 0.4)',
+    });
+  };
+
+  const handleClick = () => {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  };
+
+  return (
+    <div
+      ref={containerRef}
+      className="text-right cursor-pointer select-none"
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleLeave}
+      onClick={handleClick}
+      style={{ minWidth: '32px', perspective: '400px' }}
+    >
+      <p>
+        <span ref={topRef} className="mono text-[14px] inline-block" style={{ color: 'var(--color-primary)', transformStyle: 'preserve-3d' }}>
+          19
+        </span>
+      </p>
+      <p>
+        <span ref={arrowRef} className="text-[14px] inline-block" style={{ color: 'var(--color-text-secondary)' }}>
+          →
+        </span>
+      </p>
+      <p>
+        <span ref={bottomRef} className="mono bold text-[14px] inline-block" style={{ color: 'var(--color-text)', transformStyle: 'preserve-3d' }}>
+          26
+        </span>
+      </p>
+    </div>
+  );
+}
+
 export default function HeroSection() {
   const navigate = useNavigate();
   const sectionRef = useRef<HTMLElement>(null);
@@ -80,11 +188,7 @@ export default function HeroSection() {
               SINCE 2026
             </p>
           </div>
-          <div className="text-right">
-            <p className="mono text-[14px]" style={{ color: 'var(--color-primary)' }}>19</p>
-            <p className="text-[14px]" style={{ color: 'var(--color-text-secondary)' }}>→</p>
-            <p className="mono bold text-[14px]" style={{ color: 'var(--color-text)' }}>26</p>
-          </div>
+          <YearCounter />
         </div>
 
         {/* Title + Orange Bar */}
