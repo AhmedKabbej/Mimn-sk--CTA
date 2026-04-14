@@ -58,32 +58,6 @@ function CloudLoader({ onComplete }: { onComplete: () => void }) {
   );
 }
 
-/* ── Helper: split text into char spans for GSAP ── */
-function splitTextToChars(text: string): HTMLSpanElement[] {
-  const chars: HTMLSpanElement[] = [];
-  text.split(' ').forEach((word, wordIdx, arr) => {
-    const wordWrap = document.createElement('span');
-    wordWrap.style.display = 'inline-block';
-    word.split('').forEach((char) => {
-      const span = document.createElement('span');
-      span.textContent = char;
-      span.style.display = 'inline-block';
-      wordWrap.appendChild(span);
-      chars.push(span);
-    });
-    if (wordIdx < arr.length - 1) {
-      const space = document.createElement('span');
-      space.innerHTML = '&nbsp;';
-      space.style.display = 'inline-block';
-      wordWrap.appendChild(space);
-      chars.push(space);
-    }
-    // append wordWrap to parent later
-    chars.push(wordWrap as unknown as HTMLSpanElement);
-  });
-  return chars;
-}
-
 /* ── Main Cloud Page ── */
 export default function CloudPage() {
   const navigate = useNavigate();
@@ -127,13 +101,12 @@ export default function CloudPage() {
 
       /* Text-split: Subtitle lines */
       const subEl = subtitleRef.current!;
-      const subLines = (subEl.textContent || '').split('\n').filter(Boolean);
       // Grab the raw text before clearing
       const rawSub = subEl.getAttribute('data-text') || subEl.textContent || '';
       subEl.innerHTML = '';
       subEl.style.visibility = 'visible';
       const subChars: HTMLSpanElement[] = [];
-      rawSub.split('\n').filter(Boolean).forEach((line, lineIdx, lines) => {
+      rawSub.split('\n').filter(Boolean).forEach((line) => {
         const lineDiv = document.createElement('div');
         line.trim().split(' ').forEach((word, wordIdx, arr) => {
           const wordWrap = document.createElement('span');
