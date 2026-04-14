@@ -62,6 +62,7 @@ function CloudLoader({ onComplete }: { onComplete: () => void }) {
 export default function CloudPage() {
   const navigate = useNavigate();
   const [loaderDone, setLoaderDone] = useState(false);
+  const [zoomed, setZoomed] = useState(false);
   const pageRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -158,7 +159,7 @@ export default function CloudPage() {
   return (
     <div
       ref={pageRef}
-      className="h-screen flex flex-col items-center justify-between px-6 py-6 md:py-8 relative overflow-hidden"
+      className="min-h-screen flex flex-col items-center px-5 py-8 md:py-6 relative overflow-y-auto gap-4 md:gap-2"
       style={{ background: '#E4E4E4' }}
     >
       {/* Back button */}
@@ -173,26 +174,27 @@ export default function CloudPage() {
         Retour
       </button>
 
-      {/* Top — orange label */}
-      <p className="mono uppercase bold mt-6" style={{ fontSize: '11px', color: 'var(--color-primary)', letterSpacing: '3px' }}>
-        Low-tech cloud · Ethical by design
-      </p>
-
       {/* Center block */}
-      <div className="w-full max-w-[900px] flex flex-col items-center text-center relative z-10 flex-1 justify-center">
+      <div className="w-full max-w-[900px] flex flex-col items-center text-center relative z-10 gap-2 md:gap-1">
+        {/* Top — orange label */}
+        <p className="mono uppercase bold mt-12 md:mt-8" style={{ fontSize: '11px', color: 'var(--color-primary)', letterSpacing: '3px' }}>
+          Low-tech cloud · Ethical by design
+        </p>
+
         {/* Image — hero */}
         <img
           ref={imgRef}
           src="/CloudBETA.png"
           alt="Mimneskõ Cloud"
-          className="w-[50vw] max-w-[320px] md:w-[28vw] md:max-w-[340px] mb-4 md:mb-5"
-          style={{ filter: 'drop-shadow(0 16px 48px rgba(0,0,0,0.10))' }}
+          onClick={() => setZoomed(true)}
+          className="w-[90vw] max-w-[90vw] md:w-[22vw] md:max-w-[280px] mb-3 md:mb-3 transition-transform duration-300 hover:scale-105"
+          style={{ filter: 'drop-shadow(0 16px 48px rgba(0,0,0,0.10))', cursor: 'pointer' }}
         />
 
         {/* Title */}
         <h1
           ref={titleRef}
-          className="bold uppercase leading-none mb-2"
+          className="bold uppercase leading-none mt-2 mb-2 md:mt-4 md:mb-2"
           style={{ fontSize: 'clamp(1.6rem, 5vw, 44px)', color: 'var(--color-black)', letterSpacing: '-0.03em', visibility: 'hidden' }}
         >
           Mimneskõ Cloud
@@ -202,24 +204,24 @@ export default function CloudPage() {
         <p
           ref={subtitleRef}
           data-text={'Un cloud low-tech, éthique et souverain.\nVos souvenirs vous appartiennent — pour toujours.'}
-          className="mb-5 md:mb-6"
-          style={{ fontSize: '13px', lineHeight: 1.6, color: 'var(--color-text-secondary)', maxWidth: '380px', visibility: 'hidden' }}
+          className="mb-3 md:mb-3"
+          style={{ fontSize: '13px', lineHeight: 1.5, color: 'var(--color-text-secondary)', maxWidth: '380px', visibility: 'hidden' }}
         >
           {'Un cloud low-tech, éthique et souverain.\nVos souvenirs vous appartiennent — pour toujours.'}
         </p>
 
         {/* Orange bar */}
-        <div style={{ width: '50px', height: '4px', background: 'var(--color-primary)', marginBottom: '16px' }} />
+        <div style={{ width: '50px', height: '3px', background: 'var(--color-primary)', marginBottom: '14px' }} />
 
         {/* Pricing cards — lifetime, hover select */}
-        <div ref={featuresRef} className="grid grid-cols-3 gap-3 md:gap-4 w-full max-w-[720px] mb-4 md:mb-5">
+        <div ref={featuresRef} className="grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-3 md:gap-4 w-full max-w-[720px] mb-4 md:mb-4">
           {/* Minimalist */}
           <div
             data-cloud-feature
-            className="pricing-card flex flex-col items-center py-4 md:py-5 px-3 cursor-pointer"
+            className="pricing-card flex flex-col items-center py-3 md:py-4 px-3 cursor-pointer"
             style={{ border: '1.5px solid rgba(0,0,0,0.12)', background: 'rgba(255,255,255,0.5)' }}
           >
-            <span className="mono uppercase bold" style={{ fontSize: '9px', letterSpacing: '2px', color: 'var(--color-primary)', marginBottom: '4px' }}>Minimalist</span>
+            <span className="mono uppercase bold" style={{ fontSize: '9px', letterSpacing: '2px', color: 'var(--color-primary)', marginBottom: '3px' }}>Minimalist</span>
             <span className="pricing-price bold" style={{ fontSize: 'clamp(22px, 3vw, 30px)', color: 'var(--color-black)', lineHeight: 1, transition: 'color 0.3s' }}>149€</span>
             <span className="mono" style={{ fontSize: '9px', color: 'var(--color-text-secondary)', marginBottom: '6px' }}>à vie</span>
             <div className="pricing-bar" style={{ width: '24px', height: '1.5px', background: 'var(--color-primary)', marginBottom: '6px', transition: 'width 0.3s' }} />
@@ -233,10 +235,10 @@ export default function CloudPage() {
           {/* Premium — highlighted */}
           <div
             data-cloud-feature
-            className="pricing-card-featured flex flex-col items-center py-4 md:py-5 px-3 relative cursor-pointer"
+            className="pricing-card-featured flex flex-col items-center py-3 md:py-4 px-3 relative cursor-pointer"
             style={{ border: '2px solid var(--color-primary)', background: 'rgba(255,255,255,0.75)' }}
           >
-            <span className="mono uppercase bold" style={{ fontSize: '9px', letterSpacing: '2px', color: 'var(--color-primary)', marginBottom: '4px' }}>Premium</span>
+            <span className="mono uppercase bold" style={{ fontSize: '9px', letterSpacing: '2px', color: 'var(--color-primary)', marginBottom: '3px' }}>Premium</span>
             <span className="pricing-price bold" style={{ fontSize: 'clamp(22px, 3vw, 30px)', color: 'var(--color-black)', lineHeight: 1, transition: 'color 0.3s' }}>299€</span>
             <span className="mono" style={{ fontSize: '9px', color: 'var(--color-text-secondary)', marginBottom: '6px' }}>à vie</span>
             <div className="pricing-bar" style={{ width: '24px', height: '1.5px', background: 'var(--color-primary)', marginBottom: '6px', transition: 'width 0.3s' }} />
@@ -250,10 +252,10 @@ export default function CloudPage() {
           {/* Modern */}
           <div
             data-cloud-feature
-            className="pricing-card flex flex-col items-center py-4 md:py-5 px-3 cursor-pointer"
+            className="pricing-card flex flex-col items-center py-3 md:py-4 px-3 cursor-pointer"
             style={{ border: '1.5px solid rgba(0,0,0,0.12)', background: 'rgba(255,255,255,0.5)' }}
           >
-            <span className="mono uppercase bold" style={{ fontSize: '9px', letterSpacing: '2px', color: 'var(--color-primary)', marginBottom: '4px' }}>Modern</span>
+            <span className="mono uppercase bold" style={{ fontSize: '9px', letterSpacing: '2px', color: 'var(--color-primary)', marginBottom: '3px' }}>Modern</span>
             <span className="pricing-price bold" style={{ fontSize: 'clamp(22px, 3vw, 30px)', color: 'var(--color-black)', lineHeight: 1, transition: 'color 0.3s' }}>499€</span>
             <span className="mono" style={{ fontSize: '9px', color: 'var(--color-text-secondary)', marginBottom: '6px' }}>à vie</span>
             <div style={{ width: '24px', height: '1.5px', background: 'var(--color-primary)', marginBottom: '6px' }} />
@@ -266,7 +268,7 @@ export default function CloudPage() {
         </div>
 
         {/* Orange note */}
-        <p className="mono" style={{ fontSize: '10px', color: 'var(--color-primary)', letterSpacing: '0.5px', marginBottom: '12px' }}>
+        <p className="mono" style={{ fontSize: '10px', color: 'var(--color-primary)', letterSpacing: '0.5px', marginTop: '8px', marginBottom: '10px' }}>
           * Serveur physique livré chez vous · Paiement unique à vie
         </p>
 
@@ -306,6 +308,22 @@ export default function CloudPage() {
         </p>
         <div style={{ width: '20px', height: '1.5px', background: 'var(--color-primary)' }} />
       </div>
+
+      {/* Lightbox zoom */}
+      {zoomed && (
+        <div
+          onClick={() => setZoomed(false)}
+          className="fixed inset-0 z-50 flex items-center justify-center cursor-pointer"
+          style={{ background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(8px)' }}
+        >
+          <img
+            src="/CloudBETA.png"
+            alt="Mimneskõ Cloud"
+            className="max-w-[90vw] max-h-[85vh] object-contain"
+            style={{ filter: 'drop-shadow(0 24px 64px rgba(0,0,0,0.3))' }}
+          />
+        </div>
+      )}
     </div>
   );
 }

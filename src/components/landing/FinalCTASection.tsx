@@ -162,7 +162,7 @@ export default function FinalCTASection() {
         <h2
           ref={headlineRef}
           data-text={'Réappropriez-vous\nvos souvenirs.'}
-          className="bold leading-[1.05] mb-6 md:mb-8"
+          className="bold leading-[0.45] mb-6 md:mb-8"
           style={{
             fontSize: 'clamp(1.6rem, 7vw, 80px)',
             color: 'var(--color-white)',

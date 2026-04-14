@@ -126,7 +126,7 @@ export default function HeroSection() {
         </div>
 
         {/* CTA Button */}
-        <div data-anim="cta" className="mt-16">
+        <div data-anim="cta" className="mt-16 flex flex-wrap items-center gap-4">
           <button
             onClick={() => navigate('/schema')}
             className="h-[52px] px-8 flex items-center justify-center gap-2 group cursor-pointer transition-all duration-300 hover:bg-[var(--color-primary)]"
@@ -136,6 +136,16 @@ export default function HeroSection() {
               ENTER
             </span>
             <span className="text-[16px] transition-transform duration-300 group-hover:translate-x-1" style={{ color: 'var(--color-white)' }}>→</span>
+          </button>
+          <button
+            onClick={() => navigate('/cloud')}
+            className="h-[52px] px-8 flex items-center justify-center gap-2 group cursor-pointer transition-all duration-300 hover:bg-[var(--color-primary)] hover:border-[var(--color-primary)]"
+            style={{ background: 'transparent', border: '2px solid var(--color-black)' }}
+          >
+            <span className="bold text-[13px] uppercase tracking-[1.5px] group-hover:text-white" style={{ color: 'var(--color-black)' }}>
+              Discover low-tech cloud
+            </span>
+            <span className="text-[16px] transition-transform duration-300 group-hover:translate-x-1 group-hover:text-white" style={{ color: 'var(--color-black)' }}>→</span>
           </button>
         </div>
       </div>
