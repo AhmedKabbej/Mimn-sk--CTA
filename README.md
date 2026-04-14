@@ -1,15 +1,31 @@
 # Mimnḗskō
 
-**Comment une expérience immersive et poétique peut-elle transformer notre rapport aux souvenirs numériques et encourager l'adoption de pratiques de stockage plus éthiques et personnelles ?**
+> Et si nos souvenirs méritaient mieux qu'un cloud ?
 
-Mimnḗskō est une expérience immersive et poétique qui transforme notre manière de conserver et de ressentir nos souvenirs numériques.
+Mimnḗskō est une expérience immersive qui transforme le stockage numérique en un espace poétique et personnel. À la croisée de l'art et du code, le projet propose une alternative éthique aux plateformes opaques — un cloud physique livré chez vous, sublimé par une couche narrative et sensible.
 
-Aujourd'hui, nous confions nos photos, nos vidéos et nos moments les plus intimes à des plateformes opaques qui exploitent silencieusement nos données.
+---
 
-Mimnḗskō propose une alternative en s'appuyant sur des solutions de cloud éthiques existantes, et en les dépassant par une couche d'expérience sensible et narrative.
+## Stack
 
-Il ne s'agit plus seulement de stocker, mais de rendre les souvenirs habitables : un monde vivant, un paysage mémoriel que l'on explore comme on naviguerait dans sa propre mémoire, entre images, émotions et fragments du passé.
+React · TypeScript · Vite · GSAP · Tailwind CSS
 
-À la croisée de l'art et du code, Mimnḗskō utilise l'immersion, l'espace négatif et l'émotion pour structurer la navigation et provoquer une prise de conscience : et si nos souvenirs méritaient mieux qu'un cloud ?
+---
 
-C'est à la fois une œuvre et un outil, une invitation à ressentir, comprendre et reprendre le contrôle de notre mémoire numérique.
+## Pages
+
+| Route | Page | Rôle |
+|---|---|---|
+| `/` | **Landing** | Page d'accueil — manifeste, principes, fonctionnement et CTA. Animation d'intro immersive avec loader MIMNESKÕ. |
+| `/schema` | **Schéma** | Visualisation plein écran du schéma technique Mimneskõ (architecture du produit). Accessible via le bouton **Enter** du hero. |
+| `/cloud` | **Cloud** | Page de vente du cloud physique — image produit, 3 offres lifetime (Minimalist 149€ / Premium 299€ / Modern 499€). Design brutaliste sur fond `#E4E4E4`. |
+| `/experience` | **Expérience** | Teaser "coming soon" de l'expérience immersive — aperçu glassmorphism avec les 3 piliers (Upload · Archive · Revive). |
+
+---
+
+## Lancer le projet
+
+```bash
+npm install
+npm run dev
+```

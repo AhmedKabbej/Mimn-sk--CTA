@@ -73,3 +73,36 @@ h1, h2, h3, h4, h5, h6 {
 .btn-cta-outline:active {
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
 }
+
+/* Pricing card hover effects */
+.pricing-card {
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              border-color 0.3s ease,
+              background 0.3s ease,
+              box-shadow 0.4s ease;
+}
+.pricing-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: var(--color-primary) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 0 20px 40px rgba(255, 90, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.06);
+}
+.pricing-card:hover .pricing-price {
+  color: var(--color-primary) !important;
+}
+.pricing-card:hover .pricing-bar {
+  width: 36px !important;
+}
+.pricing-card-featured {
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              background 0.3s ease,
+              box-shadow 0.4s ease;
+}
+.pricing-card-featured:hover {
+  transform: translateY(-10px) scale(1.03);
+  background: #fff !important;
+  box-shadow: 0 24px 48px rgba(255, 90, 0, 0.18), 0 12px 24px rgba(0, 0, 0, 0.08);
+}
+.pricing-card-featured:hover .pricing-price {
+  color: var(--color-primary) !important;
+}

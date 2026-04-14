@@ -1,10 +1,13 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function FinalCTASection() {
+  const navigate = useNavigate();
+  const [showPopup, setShowPopup] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const sphereRef = useRef<HTMLDivElement>(null);
@@ -183,6 +186,7 @@ export default function FinalCTASection() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 mb-8 md:mb-20 w-full">
           <button
             data-anim="cta-btn"
+            onClick={() => navigate('/experience')}
             className="cursor-pointer whitespace-nowrap bold btn-cta-primary w-full sm:w-auto"
             style={{ height: '48px', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', fontSize: '15px', background: 'var(--color-primary)', color: 'var(--color-white)', border: 'none' }}
           >
@@ -191,6 +195,7 @@ export default function FinalCTASection() {
           </button>
           <button
             data-anim="cta-btn"
+            onClick={() => navigate('/cloud')}
             className="cursor-pointer whitespace-nowrap bold btn-cta-outline w-full sm:w-auto"
             style={{ height: '48px', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', fontSize: '15px', background: 'transparent', color: 'var(--color-white)', border: '2px solid rgba(255,255,255,0.25)' }}
           >
@@ -215,8 +220,101 @@ export default function FinalCTASection() {
               MIMNESKÕ © 2026 — A POETIC RESISTANCE
             </span>
           </p>
+          <button
+            onClick={() => setShowPopup(true)}
+            className="mono uppercase cursor-pointer mt-3 mx-auto block"
+            style={{ fontSize: '10px', letterSpacing: '1.5px', color: 'var(--color-primary)', background: 'none', border: 'none', borderBottom: '1px solid rgba(255,90,0,0.3)', paddingBottom: '2px' }}
+          >
+            En partenariat avec Infomaniak →
+          </button>
         </div>
       </div>
+
+      {/* Infomaniak Popup */}
+      {showPopup && (
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center px-4"
+          style={{ background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)' }}
+          onClick={() => setShowPopup(false)}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-[520px]"
+            style={{
+              background: 'rgba(20,20,20,0.85)',
+              backdropFilter: 'blur(32px) saturate(1.5)',
+              WebkitBackdropFilter: 'blur(32px) saturate(1.5)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              boxShadow: '0 24px 64px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06)',
+              padding: '32px 28px',
+            }}
+          >
+            {/* Close */}
+            <button
+              onClick={() => setShowPopup(false)}
+              className="absolute top-4 right-4 cursor-pointer"
+              style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)', fontSize: '20px', lineHeight: 1 }}
+            >
+              ×
+            </button>
+
+            {/* Orange bar */}
+            <div style={{ width: '36px', height: '3px', background: 'var(--color-primary)', marginBottom: '16px' }} />
+
+            {/* Title */}
+            <h3 className="bold" style={{ fontSize: '20px', color: '#fff', marginBottom: '4px', lineHeight: 1.2 }}>
+              Votre cloud privé, <span style={{ color: 'var(--color-primary)' }}>chez vous.</span>
+            </h3>
+
+            {/* Subtitle */}
+            <p className="mono uppercase" style={{ fontSize: '9px', letterSpacing: '2px', color: 'var(--color-primary)', marginBottom: '14px' }}>
+              Imaginé par Mimneskõ · Assemblé avec Infomaniak
+            </p>
+
+            {/* Scrollable content on mobile */}
+            <div className="overflow-y-auto" style={{ maxHeight: '55vh', paddingRight: '4px' }}>
+              {/* Divider */}
+              <div style={{ height: '1px', background: 'rgba(255,255,255,0.08)', marginBottom: '14px' }} />
+
+              {/* Description — compact */}
+              <p style={{ fontSize: '13px', lineHeight: 1.65, color: 'rgba(255,255,255,0.7)', marginBottom: '12px' }}>
+                <strong style={{ color: '#fff' }}>Infomaniak</strong> est un hébergeur suisse qui propose du stockage cloud standard. Leur particularité : zéro climatisation, la chaleur des serveurs <strong style={{ color: '#fff' }}>chauffe des habitations en Suisse</strong>. 100% énergie renouvelable.
+              </p>
+              <p style={{ fontSize: '13px', lineHeight: 1.65, color: 'rgba(255,255,255,0.7)', marginBottom: '12px' }}>
+                Mimneskõ s'appuie sur ce savoir-faire. <strong style={{ color: '#fff' }}>Infomaniak conçoit et assemble nos serveurs privés</strong> dans cette même démarche éthique. Nous les transformons en une <strong style={{ color: 'var(--color-primary)' }}>expérience immersive, poétique et profondément personnelle</strong> pour stocker et revivre vos souvenirs.
+              </p>
+              <p style={{ fontSize: '13px', lineHeight: 1.65, color: 'rgba(255,255,255,0.7)', marginBottom: '16px' }}>
+                Résultat : un cloud <strong style={{ color: '#fff' }}>chez vous</strong>. Dans la cabane de votre jardin ou rangé dans un meuble — compact, silencieux, entièrement vôtre. Vos données ne transitent plus par personne.
+              </p>
+
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-3" style={{ marginBottom: '16px' }}>
+                <div className="flex flex-col items-center gap-1">
+                  <span className="mono bold" style={{ fontSize: '16px', color: 'var(--color-primary)' }}>0</span>
+                  <span className="mono uppercase" style={{ fontSize: '8px', color: 'rgba(255,255,255,0.4)', letterSpacing: '1px' }}>Climatisation</span>
+                </div>
+                <div className="flex flex-col items-center gap-1">
+                  <span className="mono bold" style={{ fontSize: '16px', color: 'var(--color-primary)' }}>100%</span>
+                  <span className="mono uppercase" style={{ fontSize: '8px', color: 'rgba(255,255,255,0.4)', letterSpacing: '1px' }}>Renouvelable</span>
+                </div>
+                <div className="flex flex-col items-center gap-1">
+                  <span className="mono bold" style={{ fontSize: '16px', color: 'var(--color-primary)' }}>🇨🇭</span>
+                  <span className="mono uppercase" style={{ fontSize: '8px', color: 'rgba(255,255,255,0.4)', letterSpacing: '1px' }}>Suisse</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Footer — logo discret en bas */}
+            <div style={{ height: '1px', background: 'rgba(255,255,255,0.06)', marginBottom: '12px' }} />
+            <div className="flex items-center justify-center gap-3">
+              <img src="/Infomaniak.png" alt="Infomaniak" style={{ height: '14px', opacity: 0.35 }} />
+              <span className="mono" style={{ fontSize: '8px', color: 'rgba(255,255,255,0.2)', letterSpacing: '1px', position: 'relative', top: '3px' }}>
+                GENÈVE, SUISSE · SINCE 1994
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

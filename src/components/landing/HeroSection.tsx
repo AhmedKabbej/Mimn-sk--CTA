@@ -1,10 +1,12 @@
 import { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function HeroSection() {
+  const navigate = useNavigate();
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
 
@@ -126,6 +128,7 @@ export default function HeroSection() {
         {/* CTA Button */}
         <div data-anim="cta" className="mt-16">
           <button
+            onClick={() => navigate('/schema')}
             className="h-[52px] px-8 flex items-center justify-center gap-2 group cursor-pointer transition-all duration-300 hover:bg-[var(--color-primary)]"
             style={{ background: 'var(--color-black)', border: 'none' }}
           >
